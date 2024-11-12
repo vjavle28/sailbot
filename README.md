@@ -1,6 +1,6 @@
 # Astro Supabase Starter
 
-[Live Demo](#)
+[Live Demo](https://astro-supabase-starter.netlify.app/)
 
 The Astro Supabase starter demonstrates how to integrate Supabase into an Astro project deployed on Netlify.
 
@@ -19,17 +19,17 @@ All commands are run from the root of the project, from a terminal:
 
 ## Deploying to Netlify
 
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/netlify-templates/astro-platform-starter)
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/netlify-templates/astro-supabase-starter)
 
 ## Developing Locally
 
 | Prerequisites                                                                |
 | :--------------------------------------------------------------------------- |
-| [Node.js](https://nodejs.org/) v18.14+.                                      |
-| (optional) [nvm](https://github.com/nvm-sh/nvm) for Node version management. |
-| [Netlify account](https://netlify.com/).                                     |
+| [Node.js](https://nodejs.org/) v18.14+                                       |
+| (optional) [nvm](https://github.com/nvm-sh/nvm) for Node version management  |
+| [Netlify account](https://netlify.com/)                                      |
 | [Netlify CLI](https://docs.netlify.com/cli/get-started/).                    |
-| [Supabase account](https://supabase.com/).                                   |
+| [Supabase account](https://supabase.com/)                                    |
 
 ### Set up the database
 
