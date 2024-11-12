@@ -1,0 +1,13 @@
+---
+interface Props {
+  code?: string;
+  text?: string;
+}
+
+const { code, text } = Astro.props;
+---
+
+<div class="p-4 mb-4 text-red-400 border border-red-900 rounded bg-red-900/20" role="alert">
+  {code && <p class="text-lg font-bold">{code}</p>}
+  {text && <p>{text}</p>}
+</div>
