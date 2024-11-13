@@ -1,6 +1,4 @@
----
-title: Set up Supabase with Netlify template
----
+# Set up Supabase with Netlify Astro template
 
 In this guide we’re going to install and configure the Supabase Netlify extension, create Supabase project and fill the database with data.
 
@@ -13,7 +11,7 @@ In this guide we’re going to install and configure the Supabase Netlify extens
 
 Once the database is provisioned, we can create the **frameworks** table. From your project dashboard, open the SQL editor.
 
-![Create the frameworks table](/images/guides/supabase-netlify-sql-editor.png)
+![Create the frameworks table](/public/images/guides/supabase-netlify-sql-editor.png)
 
 Run the following commands in the SQL editor to create the **frameworks** table.
 
@@ -33,7 +31,7 @@ CREATE TABLE frameworks (
 
 Next, let’s add some starter data to the **frameworks** table. From the Table Editor in Supabase (1), choose the **frameworks** table from the list (2) and then select **Insert > Import** data from CSV (3).
 
-![Create the frameworks table](/images/guides/supabase-netlify-import-csv.png)
+![Create the frameworks table](/public/images/guides/supabase-netlify-import-csv.png)
 
 Paste the following data:
 
@@ -58,18 +56,18 @@ Now we can install the [Supabase extension](https://app.netlify.com/extensions/s
 
 After the extension is installed, navigate to the Supabase template site that you deployed, and go to **Site configuration**. In the **General** settings, you will see a new **Supabase** section. Click **Connect** to connect your Netlify site to your Supabase account using OAuth.
 
-![Configure the Supabase extension](/images/guides/supabase-netlify-connect-oauth.png)
+![Configure the Supabase extension](/public/images/guides/supabase-netlify-connect-oauth.png)
 
 Once you’ve completed this process, return to the Supabase section of your site configuration, and choose the project you just created in Supabase. And make sure to choose Astro for the framework since the template is built with Astro.
 
-![Supabase Netlify extension configuration](/images/guides/supabase-netlify-extension-configuration.png)
+![Supabase Netlify extension configuration](/public/images/guides/supabase-netlify-extension-configuration.png)
 
 ## Deploy the site again
 
 Now that the extension is configured, we can deploy the site again. Got to **Deploys** (1) and click the **Deploy site** (2) button to deploy the site. 
 
-![Supabase Netlify extension configuration](/images/guides/deploy-button.png)
+![Supabase Netlify extension configuration](/public/images/guides/deploy-button.png)
 
 Once the build is complete, navigate to your production URL and you should see the **frameworks** that we just added to the database.
 
-![Template with data](/images/guides/web-frameworks.png)
+![Template with data](/public/images/guides/web-frameworks.png)
