@@ -1,10 +1,6 @@
 ---
-title: Set up Supabase with Netlify template
+title: Set up Supabase database
 ---
-
-In this guide we’re going to install and configure the Supabase Netlify extension, create Supabase project and fill the database with data.
-
-## Set up Supabase database
 
 1. Create Supabase account at [Supabase.com](https://supabase.com).
 2. After signing up to your Supabase account, click New project from your dashboard. Select your organization, give the project a name, generate a new password for the database, and select the us-east-1 region.
@@ -50,13 +46,9 @@ Svelte,https://svelte.dev/,svelte.svg,0,"Svelte is a UI framework that uses a co
 
 This will give you a preview of the data that will be inserted into the database. Click **Import data** to add the data to the database.
 
-## Install the Supabase Netlify extension
+## Configure the Supabase Netlify extension
 
-Now we can install the [Supabase extension](https://app.netlify.com/extensions/supabase). In the Netlify UI, go to your team’s dashboard, navigate to **Extensions** and click on the Supabase extension. Click the install button to install the extension.
-
-### Configure the Supabase extension
-
-After the extension is installed, navigate to the Supabase template site that you deployed, and go to **Site configuration**. In the **General** settings, you will see a new **Supabase** section. Click **Connect** to connect your Netlify site to your Supabase account using OAuth.
+The [Supabase Netlify extension](https://app.netlify.com/extensions/supabase) should already be installed. Visit your site's configuration page and scroll to the Supabase section. Click **Connect** to connect your Netlify site to your Supabase account using OAuth.
 
 ![Configure the Supabase extension](/images/guides/supabase-netlify-connect-oauth.png)
 
