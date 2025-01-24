@@ -10,11 +10,11 @@ const { title } = guide.data;
 const { Content } = await render(guide);
 ---
 
-<article class="p-8 border rounded border-neutral-600">
+<article class="p-8 border rounded-sm border-neutral-600">
   <h1 class="mb-6 text-2xl font-bold">
     {title}
   </h1>
-  <div class="prose prose-lg prose-neutral prose-invert">
+  <div class="prose prose-lg prose-invert">
     <Content />
   </div>
 </article>
