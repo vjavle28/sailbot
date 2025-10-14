@@ -1,9 +1,13 @@
-CREATE TABLE frameworks (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-  name TEXT NOT NULL,
-  url TEXT NOT NULL,
-  description TEXT NOT NULL,
-  logo TEXT NOT NULL,
-  likes INTEGER NOT NULL DEFAULT 0,
-  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
-);
+CREATE TABLE public.sailboat_sensor_data (
+  id bigint generated always as identity not null,
+  timestamp timestamp with time zone null default now(),
+  latitude double precision not null,
+  longitude double precision not null,
+  wind_speed double precision null,
+  wind_direction double precision null,
+  boat_speed double precision null,
+  heading double precision null,
+  battery_level double precision null,
+  photo_url text null,
+  constraint sailboat_sensor_data_pkey primary key (id)
+) TABLESPACE pg_default;

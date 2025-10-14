@@ -7,29 +7,31 @@ In this guide we’re going to install and configure the Supabase Netlify extens
 1. Create Supabase account at [Supabase.com](https://supabase.com).
 2. After signing up to your Supabase account, click New project from your dashboard. Select your organization, give the project a name, generate a new password for the database, and select the us-east-1 region.
 
-## Create the frameworks table
+## Create the sailboat_sensor_data table
 
-Once the database is provisioned, we can create the **frameworks** table. From your project dashboard, open the SQL editor.
+Once the database is provisioned, create the **sailboat_sensor_data** table. From your project dashboard, open the SQL editor and run the SQL below.
 
-![Create the frameworks table](/public/images/guides/supabase-netlify-sql-editor.png)
+![Create the sensor table](/public/images/guides/supabase-netlify-sql-editor.png)
 
-Run the following commands in the SQL editor to create the **frameworks** table.
-
-```sql
-CREATE TABLE frameworks (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-  name TEXT NOT NULL,
-  url TEXT NOT NULL,
-  description TEXT NOT NULL,
-  logo TEXT NOT NULL,
-  likes INTEGER NOT NULL DEFAULT 0,
-  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
-);
+```
+create table public.sailboat_sensor_data (
+  id bigint generated always as identity not null,
+  timestamp timestamp with time zone null default now(),
+  latitude double precision not null,
+  longitude double precision not null,
+  wind_speed double precision null,
+  wind_direction double precision null,
+  boat_speed double precision null,
+  heading double precision null,
+  battery_level double precision null,
+  photo_url text null,
+  constraint sailboat_sensor_data_pkey primary key (id)
+) tablespace pg_default;
 ```
 
 ## Add data
 
-Next, let’s add some starter data to the **frameworks** table. From the Table Editor in Supabase (1), choose the **frameworks** table from the list (2) and then select **Insert > Import** data from CSV (3).
+Next, let’s add some starter data to the **sailboat_sensor_data** table. From the Table Editor in Supabase (1), choose the **sailboat_sensor_data** table from the list (2) and then select **Insert > Import** data from CSV (3).
 
 ![Create the frameworks table](/public/images/guides/supabase-netlify-import-csv.png)
 
@@ -68,6 +70,6 @@ Now that the extension is configured, we can deploy the site again. Got to **Dep
 
 ![Supabase Netlify extension configuration](/public/images/guides/deploy-button.png)
 
-Once the build is complete, navigate to your production URL and you should see the **frameworks** that we just added to the database.
+Once the build is complete, navigate to your production URL and you should see the recent **sailboat sensor** readings that were added to the database.
 
 ![Template with data](/public/images/guides/web-frameworks.png)

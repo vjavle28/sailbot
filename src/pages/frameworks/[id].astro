@@ -7,55 +7,67 @@ export const prerender = false;
 const { id } = Astro.params;
 
 if (!id) {
-  throw new Error("No framework id provided");
+  throw new Error("No sensor id provided");
 }
 
-// Fetch pet data from Supabase if connection is set up
-let framework;
+// Fetch sensor data from Supabase if connection is set up
+let sensor;
 if (supabase) {
   const { data, error } = await supabase
-    .from("frameworks")
+    .from("sailboat_sensor_data")
     .select("*")
-    .eq("id", id)
+    .eq("id", Number(id))
     .single();
-  framework = data ? data : null;
-  if (error || !framework) {
+  sensor = data ? data : null;
+  if (error || !sensor) {
     console.error(error);
-    throw new Error("No framework found");
+    throw new Error("No sensor data found");
   }
 }
 ---
 
-<Layout title={`${framework?.name} | Frameworks`}>
+<Layout title={`Sensor ${sensor?.id} | Sailboat`}>
   <article class="border-b pb-14 border-neutral-600">
-    <header
-      class="flex flex-wrap items-center justify-between pb-2 mb-8 border-b"
-    >
-      <h1 class="mb-4 text-5xl font-bold">{framework?.name}</h1>
-      <a href={framework?.url} class="underline">Website &#8599;</a>
+    <header class="pb-2 mb-8 border-b">
+      <h1 class="mb-4 text-3xl font-bold">Sensor reading {sensor?.id}</h1>
+      <p class="font-mono">{new Date(sensor?.timestamp).toLocaleString()}</p>
     </header>
 
-    <figure>
-      <img
-        src={`/.netlify/images?url=/images/${framework?.logo}`}
-        alt={framework?.name}
-        class="mb-2 border rounded-sm border-neutral-500"
-      />
-      <figcaption class="font-mono text-xs">{framework?.name} logo</figcaption>
-    </figure>
+    {sensor?.photo_url && (
+      <figure>
+        <img src={sensor.photo_url} alt={`photo ${sensor.id}`} class="mb-4 border rounded-sm border-neutral-500" />
+      </figure>
+    )}
 
-    <p class="py-6 text-xl">{framework?.description}</p>
-
-    <form action={`/api/frameworks/${framework?.id}/like`} method="post">
-      <h2 class="mb-2 text-2xl">Like {framework?.name}!</h2>
-
-      <p class="mb-4">
-        {framework?.name} has {framework?.likes} like{
-          framework?.likes === 1 ? "" : "s"
-        }.
-      </p>
-
-      <button type="submit" class="px-4 py-2 bg-green-500 rounded-sm text-neutral-800 hover:bg-green-600">Give {framework?.name} your vote &starf;</button>
-    </form>
+    <dl class="grid grid-cols-2 gap-4 text-lg">
+      <div>
+        <dt class="font-mono">Latitude</dt>
+        <dd>{sensor?.latitude}</dd>
+      </div>
+      <div>
+        <dt class="font-mono">Longitude</dt>
+        <dd>{sensor?.longitude}</dd>
+      </div>
+      <div>
+        <dt class="font-mono">Wind Speed</dt>
+        <dd>{sensor?.wind_speed ?? "—"}</dd>
+      </div>
+      <div>
+        <dt class="font-mono">Wind Direction</dt>
+        <dd>{sensor?.wind_direction ?? "—"}</dd>
+      </div>
+      <div>
+        <dt class="font-mono">Boat Speed</dt>
+        <dd>{sensor?.boat_speed ?? "—"}</dd>
+      </div>
+      <div>
+        <dt class="font-mono">Heading</dt>
+        <dd>{sensor?.heading ?? "—"}</dd>
+      </div>
+      <div>
+        <dt class="font-mono">Battery Level</dt>
+        <dd>{sensor?.battery_level ?? "—"}</dd>
+      </div>
+    </dl>
   </article>
 </Layout>

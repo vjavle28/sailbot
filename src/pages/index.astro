@@ -8,17 +8,18 @@ import { supabase } from "../utils/database";
 
 export const prerender = false;
 
-let frameworks;
-let frameworksError;
+let sensorData;
+let sensorError;
 
-// Fetch frameworks data from Supabase if connection is set up
+// Fetch latest sailboat sensor data from Supabase if connection is set up
 if (supabase) {
   const { data, error } = await supabase
-    .from("frameworks")
+    .from("sailboat_sensor_data")
     .select("*")
-    .order("likes", { ascending: false });
-  frameworks = data;
-  frameworksError = error;
+    .order("timestamp", { ascending: false })
+    .limit(50);
+  sensorData = data;
+  sensorError = error;
 }
 
 // Get guides
@@ -26,37 +27,43 @@ const connectGuide = await getEntry("guides", "guide-connect-supabase");
 const fetchDataGuide = await getEntry("guides", "guide-fetch-data");
 ---
 
-<Layout title="Web Frameworks">
+<Layout title="Sailboat Sensor Data">
   {
     supabase ? (
-      frameworks ? (
+      sensorData ? (
         <>
-          <h1 class="mb-8 text-4xl font-bold">
-            Vote for Your Favorite Web Framework
-          </h1>
+          <h1 class="mb-8 text-4xl font-bold">Recent Sailboat Sensor Readings</h1>
           <table class="w-full text-left">
             <thead>
               <tr class="font-mono text-base border-t border-b">
-                <th>Name</th>
-                <th>Logo</th>
-                <th>Likes</th>
+                <th>Time</th>
+                <th>Latitude</th>
+                <th>Longitude</th>
+                <th>Wind (m/s)</th>
+                <th>Boat (kn)</th>
+                <th>Battery</th>
+                <th>Details</th>
               </tr>
             </thead>
             <tbody>
-              {frameworks?.map((framework) => (
-                <TableRow framework={framework} />
+              {sensorData?.map((row) => (
+                <tr class="border-b border-neutral-600">
+                  <td class="font-mono">{new Date(row.timestamp).toLocaleString()}</td>
+                  <td>{row.latitude.toFixed(6)}</td>
+                  <td>{row.longitude.toFixed(6)}</td>
+                  <td>{row.wind_speed ?? "—"}</td>
+                  <td>{row.boat_speed ?? "—"}</td>
+                  <td>{row.battery_level ?? "—"}</td>
+                  <td><a href={`/frameworks/${row.id}`} class="underline">View</a></td>
+                </tr>
               ))}
             </tbody>
           </table>
         </>
       ) : (
         <>
-          {frameworksError && (
-            <Alert
-              title={frameworksError.code}
-              text={frameworksError.message}
-              variant="error"
-            />
+          {sensorError && (
+            <Alert title={sensorError.code} text={sensorError.message} variant="error" />
           )}
           {fetchDataGuide && <Guide guide={fetchDataGuide} />}
         </>

@@ -9,33 +9,42 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      frameworks: {
+      sailboat_sensor_data: {
         Row: {
-          description: string;
-          created_at: string;
-          url: string;
-          id: string;
-          logo: string;
-          name: string;
-          likes: number;
+          id: number;
+          timestamp: string | null;
+          latitude: number;
+          longitude: number;
+          wind_speed: number | null;
+          wind_direction: number | null;
+          boat_speed: number | null;
+          heading: number | null;
+          battery_level: number | null;
+          photo_url: string | null;
         };
         Insert: {
-          description: string;
-          created_at?: string;
-          url: string;
-          id?: string;
-          logo: string;
-          name: string;
-          likes?: number;
+          id?: number;
+          timestamp?: string | null;
+          latitude: number;
+          longitude: number;
+          wind_speed?: number | null;
+          wind_direction?: number | null;
+          boat_speed?: number | null;
+          heading?: number | null;
+          battery_level?: number | null;
+          photo_url?: string | null;
         };
         Update: {
-          description?: string;
-          created_at?: string;
-          url?: string;
-          id?: string;
-          logo?: string;
-          name?: string;
-          likes?: number;
+          id?: number;
+          timestamp?: string | null;
+          latitude?: number;
+          longitude?: number;
+          wind_speed?: number | null;
+          wind_direction?: number | null;
+          boat_speed?: number | null;
+          heading?: number | null;
+          battery_level?: number | null;
+          photo_url?: string | null;
         };
         Relationships: [];
       };

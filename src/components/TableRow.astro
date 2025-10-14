@@ -2,21 +2,18 @@
 import type { Tables } from "../../supabase/types.ts";
 
 interface Props {
-  framework: Tables<"frameworks">;
+  row: Tables<"sailboat_sensor_data">;
 }
 
-const { framework } = Astro.props;
+const { row } = Astro.props;
 ---
 
 <tr class="border-b border-neutral-600">
-  <td class="text-xl font-bold">{framework.name}</td>
-  <td>
-    <img
-      src={`/.netlify/images?url=/images/${framework.logo}`}
-      class="w-32"
-      alt={framework.name}
-    />
-  </td>
-  <td>{framework.likes} like{framework.likes === 1 ? "" : "s"}</td>
-  <td><a href={`/frameworks/${framework.id}`} class="underline">Learn more &rarr;</a></td>
+  <td class="font-mono">{new Date(row.timestamp).toLocaleString()}</td>
+  <td>{row.latitude.toFixed(6)}</td>
+  <td>{row.longitude.toFixed(6)}</td>
+  <td>{row.wind_speed ?? "—"}</td>
+  <td>{row.boat_speed ?? "—"}</td>
+  <td>{row.battery_level ?? "—"}</td>
+  <td><a href={`/frameworks/${row.id}`} class="underline">Learn more &rarr;</a></td>
 </tr>
